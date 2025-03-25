@@ -585,18 +585,17 @@ INSERT INTO TiposProductos (nombre, descripcion, padre_id) VALUES
 ('Ciclismo', 'Bicicletas y accesorios', 8),
 ('Camping', 'Equipo de camping', 8);
 
--- Inserts para Productos
-INSERT INTO Productos (nombre, precio, proveedor_id, tipo_id) VALUES
-('Smartphone X', 1200.00, 1, 2),
-('Laptop Pro', 2500.00, 2, 3),
-('Horno Eléctrico', 300.00, 3, 5),
-('Zapatillas Running', 150.00, 4, 7),
-('Bicicleta Montaña', 800.00, 5, 9),
-('Tienda de Campaña', 250.00, 6, 10),
-('Cámara Digital', 450.00, 7, 1),
-('Reloj Inteligente', 200.00, 8, 2),
-('Lavadora', 600.00, 9, 4),
-('Sofá', 1200.00, 10, 4);
+INSERT INTO Productos (nombre, proveedor_id, tipo_id) VALUES
+('Smartphone X', 1, 2),
+('Laptop Pro', 2, 3),
+('Horno Eléctrico', 3, 5),
+('Zapatillas Running', 4, 7),
+('Bicicleta Montaña', 5, 9),
+('Tienda de Campaña', 6, 10),
+('Cámara Digital', 7, 1),
+('Reloj Inteligente', 8, 2),
+('Lavadora', 9, 4),
+('Sofá', 10, 4);
 
 -- Inserts para PreciosProductos
 INSERT INTO PreciosProductos (producto_id, precio, fecha_inicio, fecha_fin) VALUES
@@ -735,9 +734,11 @@ LEFT JOIN Ubicaciones ON Clientes_Ubicaciones.ubicacion_id = Ubicaciones.id;
    ( LEFT JOIN ).
 
 ```mysql
-SELECT Empleados.id AS empleado_id, Empleados.nombre AS empleado, Pedidos.id AS pedido_id
-FROM Empleados
-LEFT JOIN Pedidos ON Empleados.id = Pedidos.id;
+SELECT datosempleados.id AS empleado_id, 
+       datosempleados.nombre AS empleado, 
+       pedidos.id AS pedido_id
+FROM datosempleados
+LEFT JOIN pedidos ON datosempleados.id = pedidos.id;
 ```
 
 5. Obtener el tipo de producto y los productos asociados con INNER JOIN .
@@ -761,9 +762,9 @@ GROUP BY Clientes.nombre;
    específicos.
 
 ```mysql
-SELECT Pedidos.id AS pedido_id, Empleados.nombre AS empleado
+SELECT Pedidos.id AS pedido_id, DatosEmpleados.nombre AS empleado
 FROM Pedidos
-INNER JOIN Empleados ON Pedidos.id = Empleados.id;
+INNER JOIN DatosEmpleados ON Pedidos.id = DatosEmpleados.id;
 ```
 
 8. Mostrar productos que no han sido pedidos ( RIGHT JOIN ).
